@@ -17,6 +17,6 @@
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   }
 }
