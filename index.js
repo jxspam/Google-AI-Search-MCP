@@ -58,8 +58,8 @@ app.get('/search', async (req, res) => {
 });
 
 app.listen(port, () => {
-  if (!argv.mcp) {
-    console.log(`Server listening on port ${port}`)
+  if (!process.argv.includes('--mcp')) {
+    console.log(`Server listening on port ${port}`);
   }
 });
 

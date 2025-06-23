@@ -46,6 +46,7 @@ To use this MCP server with your AI code editor, you can add the following to yo
       "args": [
         "-y",
         "@jxspam/google-ai-search-mcp@latest",
+        "--mcp",
         "--apiKey",
         "YOUR_API_KEY",
         "--model",
