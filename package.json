@@ -1,6 +1,6 @@
 {
   "name": "@jxspam/google-ai-search-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Using the Gemini API Key to access Google Search results (just like Perplexity, Brave, Tavily)",
   "main": "index.js",
   "bin": {
