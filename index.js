@@ -95,12 +95,8 @@ rl.on('line', async (line) => {
                 }
             }
 
-            if (toolParams) {
+            if (toolParams && typeof toolParams === 'object') {
                 query = toolParams.query || toolParams.q;
-            }
-
-            if (!query) {
-                query = params.query || params.q;
             }
             
             if (!query) {
@@ -109,13 +105,13 @@ rl.on('line', async (line) => {
             }
 
             try {
-                const result = await performSearch(query);
-                sendResponse(id, result);
-            } catch (err) {
-                sendError(id, -32000, err.message);
+                const searchResult = await performSearch(query);
+                sendResponse(id, searchResult);
+            } catch (e) {
+                sendError(id, -32603, `Search failed: ${e.message}`);
             }
         } else {
-            sendError(id, -32601, `Tool not found: ${params.name}`);
+            sendError(id, -32601, `Method not found: ${params.name}`);
         }
     }
     else {
