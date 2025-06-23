@@ -82,6 +82,7 @@ rl.on('line', async (line) => {
             }]
         });
     } else if (method === 'tools/call') {
+        console.error(`Received tool call with params: ${JSON.stringify(params)}`);
         if (params.name === 'search') {
             let query;
             let toolParams = params.parameters;
