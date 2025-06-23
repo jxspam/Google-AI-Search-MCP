@@ -10,11 +10,15 @@ const argv = yargs(hideBin(process.argv)).option('model', {
     type: 'string',
     description: 'The Gemini model to use',
     default: 'gemini-1.5-flash-latest'
+}).option('apiKey', {
+    alias: 'k',
+    type: 'string',
+    description: 'Your Gemini API key'
 }).argv;
 
-const apiKey = process.env.GEMINI_API_KEY;
+const apiKey = argv.apiKey || process.env.GEMINI_API_KEY;
 if (!apiKey) {
-  console.error('Missing GEMINI_API_KEY environment variable.');
+  console.error('Missing GEMINI_API_KEY environment variable or --apiKey flag.');
   process.exit(1);
 }
 
