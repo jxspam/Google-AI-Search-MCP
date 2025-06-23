@@ -12,7 +12,7 @@
       "name": "search",
       "description": "Get answers from Google Search using the Gemini API.",
       "entrypoint": "index.js",
-      "command": "node index.js",
+      "command": "node index.js --mcp",
       "requires_auth": true,
       "auth_instructions": "Ensure the GEMINI_API_KEY environment variable is set."
     }

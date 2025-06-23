@@ -14,6 +14,10 @@ const argv = yargs(hideBin(process.argv)).option('model', {
     alias: 'k',
     type: 'string',
     description: 'Your Gemini API key'
+}).option('mcp', {
+    type: 'boolean',
+    description: 'Run in MCP mode',
+    default: false
 }).argv;
 
 const apiKey = argv.apiKey || process.env.GEMINI_API_KEY;
@@ -53,5 +57,9 @@ app.get('/search', async (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+app.listen(port, () => {
+  if (!argv.mcp) {
+    console.log(`Server listening on port ${port}`)
+  }
+});
 
