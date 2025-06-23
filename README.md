@@ -181,46 +181,11 @@ This server implements the full MCP protocol with:
 }
 ```
 
-## Testing
-
-Run the test script to verify functionality:
-
-```bash
-node test_server.js
-```
-
-Or test manually with test requests:
-
-```bash
-cat test_requests.txt | node index.js --apiKey YOUR_API_KEY
-```
-
-## Development
-
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Run tests: `node test_server.js`
-4. Make your changes
-5. Test thoroughly
-6. Update version in package.json
-7. Publish: `npm publish`
-
 ## Version History
 
-### v1.0.15
+### v1.0.23
 
-- ✅ Fixed MCP protocol implementation
-- ✅ Added proper `tools/list` support
-- ✅ Improved error handling
-- ✅ Fixed parameter parsing (`arguments` vs `parameters`)
-- ✅ Enhanced response format
-- ✅ Added comprehensive testing
-
-### v1.0.14
-
-- Initial working version
-- Basic Google Search integration
-- Gemini API integration
+- Only started from this version works (from 24 June 2025)
 
 ## License
 
