@@ -66,31 +66,32 @@ This MCP server defaults to **Gemini 1.5 Flash Latest** for optimal performance 
 
 According to [Google's official documentation](https://ai.google.dev/gemini-api/docs/pricing):
 
-| Model | Free Tier Grounding with Google Search |
-|-------|----------------------------------------|
-| Gemini 2.5 Flash | ✅ Up to 500 RPD (shared with Flash-Lite) |
-| Gemini 2.5 Flash-Lite | ✅ Up to 500 RPD (shared with Flash) |
-| Gemini 2.0 Flash | ✅ Up to 500 RPD |
-| Gemini 1.5 family (all) | ❌ Not available in free tier |
-| Gemini 2.5 Pro | ❌ Not available in free tier |
-| Gemini 2.0 Flash-Lite | ❌ No support for grounding |
+| Model                   | Free Tier Grounding with Google Search    |
+| ----------------------- | ----------------------------------------- |
+| Gemini 2.5 Flash        | ✅ Up to 500 RPD (shared with Flash-Lite) |
+| Gemini 2.5 Flash-Lite   | ✅ Up to 500 RPD (shared with Flash)      |
+| Gemini 2.0 Flash        | ✅ Up to 500 RPD                          |
+| Gemini 1.5 family (all) | ❌ Not available in free tier             |
+| Gemini 2.5 Pro          | ❌ Not available in free tier             |
+| Gemini 2.0 Flash-Lite   | ❌ No support for grounding               |
 
 **RPD**: Requests Per Day
 
 ### Actual Test Results (June 24, 2025)
 
-| Model | Test Results | Notes |
-|-------|-------------|-------|
-| Gemini 1.5 Flash Latest | ✅ **Working** | Recommended default model |
-| Gemini 2.5 Flash Experimental | ✅ **Working** | Latest experimental model |
-| Gemini 2.0 Flash Experimental | ✅ **Working** | Good performance |
-| Gemini 2.0 Flash Lite | ✅ **Working** | Works despite official docs |
-| Gemini 1.5 Pro | ✅ **Working** | May depend on API key access level |
-| Gemini 2.5 Pro | ✅ **Working** | May depend on API key access level |
+| Model                         | Test Results   | Notes                              |
+| ----------------------------- | -------------- | ---------------------------------- |
+| Gemini 1.5 Flash Latest       | ✅ **Working** | Recommended default model          |
+| Gemini 2.5 Flash Experimental | ✅ **Working** | Latest experimental model          |
+| Gemini 2.0 Flash Experimental | ✅ **Working** | Good performance                   |
+| Gemini 2.0 Flash Lite         | ✅ **Working** | Works despite official docs        |
+| Gemini 1.5 Pro                | ✅ **Working** | May depend on API key access level |
+| Gemini 2.5 Pro                | ✅ **Working** | May depend on API key access level |
 
 **Note**: Test results may vary based on your API key's access level, billing status, or Google's current free tier policies.
 
 ### Recommended Models
+
 - **Gemini 1.5 Flash Latest** (default) - Most reliable and well-tested
 - **Gemini 2.5 Flash Experimental** - Latest features with grounding
 - **Gemini 2.0 Flash Experimental** - Good balance of performance
@@ -103,14 +104,15 @@ The search tool supports the following parameters:
 
 - **`query`** (required): The search query string
 - **`language`** (optional): Language code for results (default: "en-US")
-- **`limit`** (optional): Max results to process, 1-20 (default: 10) 
+- **`limit`** (optional): Max results to process, 1-20 (default: 10)
 - **`model`** (optional): Gemini model to use (default: "gemini-1.5-flash-latest")
 
 Example with parameters:
+
 ```json
 {
   "query": "latest AI developments",
-  "language": "en-US", 
+  "language": "en-US",
   "limit": 15,
   "model": "gemini-1.5-flash-latest"
 }
@@ -153,7 +155,7 @@ This server implements the full MCP protocol with:
         "default": "en-US"
       },
       "limit": {
-        "type": "integer", 
+        "type": "integer",
         "description": "Maximum number of search results to process (1-20)",
         "minimum": 1,
         "maximum": 20,
@@ -162,7 +164,15 @@ This server implements the full MCP protocol with:
       "model": {
         "type": "string",
         "description": "Gemini model to use for search and response generation",
-        "enum": ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-1.5-pro", "gemini-1.5-flash", "gemini-1.5-pro-latest", "gemini-1.5-flash-latest"],
+        "enum": [
+          "gemini-2.5-flash",
+          "gemini-2.5-flash-lite",
+          "gemini-2.0-flash",
+          "gemini-1.5-pro",
+          "gemini-1.5-flash",
+          "gemini-1.5-pro-latest",
+          "gemini-1.5-flash-latest"
+        ],
         "default": "gemini-1.5-flash-latest"
       }
     },
