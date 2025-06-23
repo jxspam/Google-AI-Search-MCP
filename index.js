@@ -1,6 +1,16 @@
+#!/usr/bin/env node
 require('dotenv').config();
 const express = require('express');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
+
+const argv = yargs(hideBin(process.argv)).option('model', {
+    alias: 'm',
+    type: 'string',
+    description: 'The Gemini model to use',
+    default: 'gemini-1.5-flash-latest'
+}).argv;
 
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
@@ -10,7 +20,7 @@ if (!apiKey) {
 
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
-  model: 'gemini-1.5-flash-latest',
+  model: argv.model,
   tools: [{ googleSearchRetrieval: {} }],
 });
 

@@ -1,8 +1,11 @@
 {
-  "name": "google-ai-search-mcp",
+  "name": "@jxspam/google-ai-search-mcp",
   "version": "1.0.0",
   "description": "Using the Gemini API Key to access Google Search results (just like Perplexity, Brave, Tavily)",
   "main": "index.js",
+  "bin": {
+    "google-ai-search-mcp": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +16,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "yargs": "^17.7.2"
   }
 }
