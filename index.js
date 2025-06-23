@@ -83,9 +83,26 @@ rl.on('line', async (line) => {
         });
     } else if (method === 'tools/call') {
         if (params.name === 'search') {
-            // The UI shows 'query', so let's check for that in the parameters.
-            // Also checking for 'q' for robustness.
-            const query = params.parameters?.query || params.parameters?.q;
+            let query;
+            let toolParams = params.parameters;
+
+            if (typeof toolParams === 'string') {
+                try {
+                    toolParams = JSON.parse(toolParams);
+                } catch (e) {
+                    sendError(id, -32602, 'Invalid JSON in parameters string.');
+                    return;
+                }
+            }
+
+            if (toolParams) {
+                query = toolParams.query || toolParams.q;
+            }
+
+            if (!query) {
+                query = params.query || params.q;
+            }
+            
             if (!query) {
                 sendError(id, -32602, 'Missing query parameter.');
                 return;
