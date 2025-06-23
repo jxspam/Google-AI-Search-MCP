@@ -6,22 +6,12 @@ queries.
 
 ## Setup
 
-1. Install dependencies
-   ```bash
-   npm install
-   ```
-2. Create a `.env` file with your API key:
-   ```ini
-   GEMINI_API_KEY=YOUR_API_KEY
-   ```
-3. Start the server
-   ```bash
-   node index.js
-   ```
-4. Send a request
-   ```bash
-   curl 'http://localhost:3000/search?q=What%20is%20Gemini%3F'
-   ```
+Ensure the `GEMINI_API_KEY` environment variable is set, then start the
+server with a single command:
+
+```bash
+node index.js
+```
 
 The response includes the model's answer and optional search metadata.
 
