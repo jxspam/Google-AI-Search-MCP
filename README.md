@@ -13,6 +13,14 @@ server with a single command:
 node index.js
 ```
 
+## Run as an MCP
+
+With the [Model Context Protocol](https://github.com/model-context-protocol) CLI, you can also run the server as an MCP:
+
+```bash
+mcp up
+```
+
 The response includes the model's answer and optional search metadata.
 
 ## Gemini Models
