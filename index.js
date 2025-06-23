@@ -18,6 +18,7 @@ const argv = yargs(hideBin(process.argv)).option('model', {
 
 const apiKey = argv.apiKey || process.env.GEMINI_API_KEY;
 if (!apiKey) {
+  // Writing to stderr to avoid polluting stdout for the MCP host
   console.error('Missing GEMINI_API_KEY environment variable or --apiKey flag.');
   process.exit(1);
 }
@@ -91,6 +92,8 @@ rl.on('line', async (line) => {
     }
   } catch (err) {
     const id = request ? request.id : null;
+    // Writing to stderr to avoid polluting stdout for the MCP host
+    console.error(`Parse error: ${err.message}`);
     sendError(id, -32700, 'Parse error');
   }
 });
