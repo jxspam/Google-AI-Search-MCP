@@ -11,8 +11,18 @@
     {
       "name": "search",
       "description": "Get answers from Google Search using the Gemini API.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search query to get answers for."
+          }
+        },
+        "required": ["query"]
+      },
       "entrypoint": "index.js",
-      "command": "node index.js --mcp",
+      "command": "node index.js",
       "requires_auth": true,
       "auth_instructions": "Ensure the GEMINI_API_KEY environment variable is set."
     }

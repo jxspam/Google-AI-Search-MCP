@@ -29,6 +29,20 @@ const model = genAI.getGenerativeModel({
   tools: [{ googleSearchRetrieval: {} }],
 });
 
+// Refactored search logic
+async function performSearch(query) {
+    const result = await model.generateContent({
+      contents: [{ role: 'user', parts: [{ text: query }] }],
+    });
+
+    const candidate = result.response.candidates?.[0];
+    const text = candidate?.content?.parts?.map(p => p.text).join('') || '';
+    const metadata = candidate?.groundingMetadata;
+
+    return { answer: text, metadata };
+}
+
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -67,27 +81,27 @@ rl.on('line', async (line) => {
                 description: "Get answers from Google Search using the Gemini API."
             }]
         });
-    } else if (method === 'search') {
-        const query = params.q;
-        if (!query) {
-            sendError(id, -32602, 'Missing q parameter.');
-            return;
+    } else if (method === 'tools/call') {
+        if (params.name === 'search') {
+            // The UI shows 'query', so let's check for that in the parameters.
+            // Also checking for 'q' for robustness.
+            const query = params.parameters?.query || params.parameters?.q;
+            if (!query) {
+                sendError(id, -32602, 'Missing query parameter.');
+                return;
+            }
+
+            try {
+                const result = await performSearch(query);
+                sendResponse(id, result);
+            } catch (err) {
+                sendError(id, -32000, err.message);
+            }
+        } else {
+            sendError(id, -32601, `Tool not found: ${params.name}`);
         }
-
-        try {
-            const result = await model.generateContent({
-              contents: [{ role: 'user', parts: [{ text: query }] }],
-            });
-
-            const candidate = result.response.candidates?.[0];
-            const text = candidate?.content?.parts?.map(p => p.text).join('') || '';
-            const metadata = candidate?.groundingMetadata;
-
-            sendResponse(id, { answer: text, metadata });
-        } catch (err) {
-            sendError(id, -32000, err.message);
-        }
-    } else {
+    }
+    else {
         sendError(id, -32601, `Method not found: ${method}`);
     }
   } catch (err) {
