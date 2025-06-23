@@ -10,21 +10,38 @@
   "tools": [
     {
       "name": "search",
-      "description": "Get answers from Google Search using the Gemini API.",
-      "parameters": {
+      "description": "Get answers from Google Search using the Gemini API.",      "parameters": {
         "type": "object",
         "properties": {
           "query": {
             "type": "string",
             "description": "The search query to get answers for."
+          },
+          "language": {
+            "type": "string",
+            "description": "The language for search results (e.g., en-US, zh-CN, es-ES, fr-FR, de-DE, ja-JP, ko-KR, pt-BR, it-IT, ru-RU, ar-SA, hi-IN, th-TH, vi-VN, nl-NL, sv-SE, no-NO, da-DK, fi-FI, pl-PL, tr-TR, he-IL, fa-IR, uk-UA, cs-CZ, sk-SK, hu-HU, ro-RO, bg-BG, hr-HR, sl-SI, et-EE, lv-LV, lt-LT, mt-MT, ga-IE, cy-GB, is-IS, mk-MK, sq-AL, sr-RS, bs-BA, me-ME, az-AZ, kk-KZ, ky-KG, uz-UZ, tg-TJ, mn-MN, my-MM, km-KH, lo-LA, si-LK, ne-NP, bn-BD, ta-LK, ml-IN, te-IN, kn-IN, gu-IN, pa-IN, or-IN, as-IN, mr-IN, sa-IN, kok-IN, mni-IN, sd-IN, mai-IN, bho-IN, ks-IN, ur-PK, ps-AF, fa-AF, uz-AF, tk-TM, ky-CN, ug-CN, bo-CN, ii-CN, za-CN, yo-NG, ig-NG, ha-NG, ff-SN, wo-SN, sw-KE, so-SO, am-ET, ti-ET, om-ET, rw-RW, rn-BI, lg-UG, ak-GH, tw-GH, ee-GH, bm-ML, dyo-SN, ses-ML, sg-CF, ln-CD, kg-CD, lua-CD, zu-ZA, xh-ZA, af-ZA, nso-ZA, tn-ZA, st-ZA, ts-ZA, ss-ZA, ve-ZA, nr-ZA). Defaults to 'en-US'.",
+            "default": "en-US"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of search results to process. Affects the comprehensiveness of the response. Range: 1-20, defaults to 10.",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 10
+          },
+          "model": {
+            "type": "string", 
+            "description": "Gemini model to use for search and response generation. Only models with free Google Search grounding are recommended.",
+            "enum": ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-1.5-pro", "gemini-1.5-flash", "gemini-1.5-pro-latest", "gemini-1.5-flash-latest"],
+            "default": "gemini-1.5-flash-latest"
           }
         },
         "required": ["query"]
       },
       "entrypoint": "index.js",
-      "command": "node index.js",
+      "command": "npx -y @jxspam/google-ai-search-mcp@latest",
       "requires_auth": true,
-      "auth_instructions": "Ensure the GEMINI_API_KEY environment variable is set."
+      "auth_instructions": "Ensure the GEMINI_API_KEY environment variable is set, or pass the --apiKey flag."
     }
   ]
 }
